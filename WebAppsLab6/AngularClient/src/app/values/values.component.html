@@ -1,0 +1,26 @@
+<p>
+  <button (click)="onClick()">Click for data</button>
+</p>
+<div *ngIf="values">
+  <ol>
+    <li *ngFor="let val of values">{{ val | uppercase }}</li>
+  </ol>
+</div>
+
+<div>
+  <select #v (change)="showValue(v.value)">
+    <option value="">Pick one...</option>
+    <option value="0">1</option>
+    <option value="1">2</option>
+    <option value="2">3</option>
+    <option value="3">4</option>
+  </select>
+  <span *ngIf="selectedValue">{{ selectedValue }}</span>
+</div>
+
+<div>
+  <form ngForm (submit)="onSubmit()">
+    <input type="text" name="newValue" [(ngModel)]="newValue" />
+    <button type="submit">Add a Value</button>
+  </form>
+</div>

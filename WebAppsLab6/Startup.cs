@@ -43,6 +43,7 @@ namespace WebAppsLab6
                  };
              });
             services.AddMvc();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -52,6 +53,16 @@ namespace WebAppsLab6
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
+            // Configure Cross Origin Resource Sharing
+            // Needed to allow 
+            app.UseCors(x => x.AllowAnyHeader()
+                .AllowAnyMethod()
+                .AllowAnyOrigin()
+                .AllowCredentials());
             app.UseAuthentication();
             app.UseMvc();
         }
