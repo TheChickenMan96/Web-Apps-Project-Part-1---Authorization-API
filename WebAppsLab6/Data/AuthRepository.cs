@@ -6,7 +6,7 @@ using WebAppsLab6.Models;
 using Microsoft.EntityFrameworkCore;
 using WebAppsLab6.Data;
 
-namespace Matricks.Data
+namespace WebAppsLab6.Data
 {
     public class AuthRepository : IAuthRepository
     {

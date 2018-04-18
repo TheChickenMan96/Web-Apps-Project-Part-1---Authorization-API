@@ -23,7 +23,7 @@ export class NavComponent implements OnInit {
   
 
   login() {
-    this.authService.login(this.model).subscribe(data => this.playAlert(0), error => this.playAlert(error.status), () => this.user = JSON.parse(localStorage.getItem('user')).userName);
+    this.authService.login(this.model).subscribe(data => this.playAlert(-10), error => this.playAlert(error.status), () => this.user = JSON.parse(localStorage.getItem('user')).userName);
   }
 
   playAlert(errorStatus) {
@@ -34,7 +34,7 @@ export class NavComponent implements OnInit {
         msg: 'Invalid userName and/or password',
         timeout: 2000
       };
-    } else if (errorStatus == 0) {
+    } else if (errorStatus == -10) {
       this.alert = {
         type: 'success',
         msg: 'Successfully Logged In',
@@ -44,6 +44,18 @@ export class NavComponent implements OnInit {
       this.alert = {
         type: 'info',
         msg: 'Logged out',
+        timeout: 2000
+      };
+    } else if (errorStatus == 500) {
+      this.alert = {
+        type: 'danger',
+        msg: 'Server Error Occurred',
+        timeout: 2000
+      };
+    } else if (errorStatus == 0) {
+      this.alert = {
+        type: 'danger',
+        msg: 'Unknown Error Occurred',
         timeout: 2000
       };
     }

@@ -25,7 +25,7 @@ var NavComponent = /** @class */ (function () {
     };
     NavComponent.prototype.login = function () {
         var _this = this;
-        this.authService.login(this.model).subscribe(function (data) { return _this.playAlert(0); }, function (error) { return _this.playAlert(error.status); }, function () { return _this.user = JSON.parse(localStorage.getItem('user')).userName; });
+        this.authService.login(this.model).subscribe(function (data) { return _this.playAlert(-10); }, function (error) { return _this.playAlert(error.status); }, function () { return _this.user = JSON.parse(localStorage.getItem('user')).userName; });
     };
     NavComponent.prototype.playAlert = function (errorStatus) {
         this.alertPlaying = true;
@@ -36,7 +36,7 @@ var NavComponent = /** @class */ (function () {
                 timeout: 2000
             };
         }
-        else if (errorStatus == 0) {
+        else if (errorStatus == -10) {
             this.alert = {
                 type: 'success',
                 msg: 'Successfully Logged In',
@@ -47,6 +47,20 @@ var NavComponent = /** @class */ (function () {
             this.alert = {
                 type: 'info',
                 msg: 'Logged out',
+                timeout: 2000
+            };
+        }
+        else if (errorStatus == 500) {
+            this.alert = {
+                type: 'danger',
+                msg: 'Server Error Occurred',
+                timeout: 2000
+            };
+        }
+        else if (errorStatus == 0) {
+            this.alert = {
+                type: 'danger',
+                msg: 'Unknown Error Occurred',
                 timeout: 2000
             };
         }

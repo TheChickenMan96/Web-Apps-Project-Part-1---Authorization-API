@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Matricks.DTOs
+namespace WebAppsLab6.DTOs
 {
     public class RegisterUserDTO
     {

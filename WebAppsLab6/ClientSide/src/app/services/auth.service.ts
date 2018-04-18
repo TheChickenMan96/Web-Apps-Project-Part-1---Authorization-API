@@ -7,7 +7,8 @@ import { User } from '../models/user';
 
 @Injectable()
 export class AuthService {
-  baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
+  //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
+  baseUrl = 'http://localhost:51190/api/auth/';
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 

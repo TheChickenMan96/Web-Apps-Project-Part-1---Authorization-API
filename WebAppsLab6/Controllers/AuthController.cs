@@ -5,14 +5,14 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
-using Matricks.Data;
-using Matricks.DTOs;
+using WebAppsLab6.Data;
+using WebAppsLab6.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace Matricks.Controllers
+namespace WebAppsLab6.Controllers
 {
     [Produces("application/json")]
     [Route("api/Auth")]

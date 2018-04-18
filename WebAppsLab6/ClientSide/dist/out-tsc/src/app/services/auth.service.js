@@ -17,7 +17,8 @@ var AuthService = /** @class */ (function () {
     function AuthService(http, jwtHelper) {
         this.http = http;
         this.jwtHelper = jwtHelper;
-        this.baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
+        //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
+        this.baseUrl = 'http://localhost:51190/api/auth/';
     }
     //The map method was not properly assigning 
     AuthService.prototype.login = function (user) {
