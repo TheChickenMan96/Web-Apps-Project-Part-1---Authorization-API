@@ -6,6 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="ClientSide\src\app\member\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
 

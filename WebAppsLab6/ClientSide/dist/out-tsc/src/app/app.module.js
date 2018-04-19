@@ -20,6 +20,8 @@ var collapse_1 = require("ngx-bootstrap/collapse");
 var angular_jwt_1 = require("@auth0/angular-jwt");
 var dropdown_1 = require("ngx-bootstrap/dropdown");
 var alert_1 = require("ngx-bootstrap/alert");
+var user_service_1 = require("./services/user.service");
+var member_list_component_1 = require("./member/member-list/member-list.component");
 function tokenGetter() {
     return localStorage.getItem('token');
 }
@@ -33,7 +35,8 @@ var AppModule = /** @class */ (function () {
                 app_component_1.AppComponent,
                 nav_component_1.NavComponent,
                 home_component_1.HomeComponent,
-                register_component_1.RegisterComponent
+                register_component_1.RegisterComponent,
+                member_list_component_1.MemberListComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -50,7 +53,7 @@ var AppModule = /** @class */ (function () {
                 dropdown_1.BsDropdownModule.forRoot(),
                 alert_1.AlertModule.forRoot()
             ],
-            providers: [auth_service_1.AuthService],
+            providers: [auth_service_1.AuthService, user_service_1.UserService],
             bootstrap: [app_component_1.AppComponent]
         })
     ], AppModule);

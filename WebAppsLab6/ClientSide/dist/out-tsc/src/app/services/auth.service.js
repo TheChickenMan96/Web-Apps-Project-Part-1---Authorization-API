@@ -13,16 +13,17 @@ var core_1 = require("@angular/core");
 var http_1 = require("@angular/common/http");
 require("rxjs/add/operator/map");
 var angular_jwt_1 = require("@auth0/angular-jwt");
+var environment_1 = require("../../environments/environment");
 var AuthService = /** @class */ (function () {
     function AuthService(http, jwtHelper) {
         this.http = http;
         this.jwtHelper = jwtHelper;
         //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
-        this.baseUrl = 'http://localhost:51190/api/auth/';
+        this.baseUrl = environment_1.environment.apiUrl;
     }
     //The map method was not properly assigning 
     AuthService.prototype.login = function (user) {
-        return this.http.post(this.baseUrl + 'login', user)
+        return this.http.post(this.baseUrl + '/auth/login', user)
             .map(function (result) {
             if (result) {
                 var buildUser = { id: result.id, userName: result.userName };
@@ -42,7 +43,7 @@ var AuthService = /** @class */ (function () {
     };
     AuthService.prototype.register = function (model) {
         var contentHeader = new http_1.HttpHeaders({ 'Content-type': 'application/json' });
-        return this.http.post(this.baseUrl + 'register', model, { headers: contentHeader });
+        return this.http.post(this.baseUrl + '/auth/register', model, { headers: contentHeader });
     };
     AuthService = __decorate([
         core_1.Injectable(),

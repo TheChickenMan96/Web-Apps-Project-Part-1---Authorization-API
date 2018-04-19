@@ -15,6 +15,8 @@ import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { JwtModule } from '@auth0/angular-jwt';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { AlertModule } from 'ngx-bootstrap/alert';
+import { UserService } from './services/user.service';
+import { MemberListComponent } from './member/member-list/member-list.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -25,7 +27,8 @@ export function tokenGetter() {
     AppComponent,
     NavComponent,
     HomeComponent,
-    RegisterComponent
+    RegisterComponent,
+    MemberListComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +45,7 @@ export function tokenGetter() {
     BsDropdownModule.forRoot(),
     AlertModule.forRoot()
   ],
-  providers: [AuthService],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -4,17 +4,18 @@ import 'rxjs/add/operator/map';
 import { AuthUser } from '../models/authuser';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { User } from '../models/user';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
   //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
-  baseUrl = 'http://localhost:51190/api/auth/';
+  baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }
 
   //The map method was not properly assigning 
   login(user) {
-    return this.http.post(this.baseUrl + 'login', user)
+    return this.http.post(this.baseUrl + '/auth/login', user)
       .map((result: any) => {
         if (result) {
           var buildUser: User = { id: result.id, userName: result.userName };
@@ -37,6 +38,6 @@ export class AuthService {
 
   register(model) {
     const contentHeader = new HttpHeaders({ 'Content-type': 'application/json' });
-    return this.http.post(this.baseUrl + 'register', model, { headers: contentHeader });
+    return this.http.post(this.baseUrl + '/auth/register', model, { headers: contentHeader });
   }
 }
