@@ -10,10 +10,16 @@ var core_1 = require("@angular/core");
 var router_1 = require("@angular/router");
 var register_component_1 = require("./register/register.component");
 var home_component_1 = require("./home/home.component");
+var member_list_component_1 = require("./member/member-list/member-list.component");
+var friend_list_component_1 = require("./friend-list/friend-list.component");
+var messages_component_1 = require("./messages/messages.component");
 var routes = [
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'home', component: home_component_1.HomeComponent },
-    { path: '', redirectTo: '/home', pathMatch: 'full' }
+    { path: '', redirectTo: '/home', pathMatch: 'full' },
+    { path: 'members', component: member_list_component_1.MemberListComponent },
+    { path: 'friends', component: friend_list_component_1.FriendListComponent },
+    { path: 'messages', component: messages_component_1.MessagesComponent },
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

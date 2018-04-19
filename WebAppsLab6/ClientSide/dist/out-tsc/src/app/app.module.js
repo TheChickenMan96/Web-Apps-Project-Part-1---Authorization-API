@@ -22,6 +22,9 @@ var dropdown_1 = require("ngx-bootstrap/dropdown");
 var alert_1 = require("ngx-bootstrap/alert");
 var user_service_1 = require("./services/user.service");
 var member_list_component_1 = require("./member/member-list/member-list.component");
+var member_card_component_1 = require("./member/member-card/member-card.component");
+var friend_list_component_1 = require("./friend-list/friend-list.component");
+var messages_component_1 = require("./messages/messages.component");
 function tokenGetter() {
     return localStorage.getItem('token');
 }
@@ -36,7 +39,10 @@ var AppModule = /** @class */ (function () {
                 nav_component_1.NavComponent,
                 home_component_1.HomeComponent,
                 register_component_1.RegisterComponent,
-                member_list_component_1.MemberListComponent
+                member_list_component_1.MemberListComponent,
+                member_card_component_1.MemberCardComponent,
+                friend_list_component_1.FriendListComponent,
+                messages_component_1.MessagesComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,

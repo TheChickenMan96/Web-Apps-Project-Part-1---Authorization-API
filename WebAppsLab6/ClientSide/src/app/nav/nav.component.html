@@ -6,14 +6,14 @@
 
   <div class="collapse navbar-collapse" id="navbarsExampleDefault" [collapse]="isCollapsed">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Matches <span class="sr-only">(current)</span></a>
+      <li *ngIf="!checkLogin()" class="nav-item">
+        <a class="nav-link" routerLink="/members">Members</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Friend Lists</a>
+      <li *ngIf="!checkLogin()" class="nav-item">
+        <a class="nav-link" routerLink="/friends">Friend Lists</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link disabled" href="#">Messages</a>
+      <li *ngIf="!checkLogin()" class="nav-item">
+        <a class="nav-link" routerLink="/messages">Messages</a>
       </li>
     </ul>
     <div *ngIf="!alertPlaying; else alertPlayer">

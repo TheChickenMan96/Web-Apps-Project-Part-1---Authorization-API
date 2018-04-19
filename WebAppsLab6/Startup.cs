@@ -71,7 +71,11 @@ namespace WebAppsLab6
                 .AllowAnyOrigin()
                 .AllowCredentials());
             app.UseAuthentication();
-            app.UseMvc();
+            app.UseMvc(routes => {
+                routes.MapSpaFallbackRoute(
+                name: "spa-fallback",
+                defaults: new { controller = "Fallback", action = "Index" });
+            });
         }
     }
 }
