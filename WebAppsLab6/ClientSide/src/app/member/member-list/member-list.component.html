@@ -1,8 +1,11 @@
-<div class="container mt-4">
+<div *ngIf="loggedIn" class="container mt-4">
   <h1 class="text-left"><strong>Members</strong></h1>
   <div class="row md-4">
     <div *ngFor="let user of users" class="col-auto">
       <app-member-card [member]="user"></app-member-card>
     </div>
   </div>
+</div>
+<div *ngIf="!loggedIn">
+  <h1 class="mt-4">You are not logged in, please log in to see this.</h1>
 </div>

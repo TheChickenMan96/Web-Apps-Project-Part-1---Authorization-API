@@ -11,6 +11,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using AutoMapper;
+using WebAppsLab6.Models;
 
 namespace WebAppsLab6.Controllers
 {
@@ -20,11 +22,13 @@ namespace WebAppsLab6.Controllers
     {
         private readonly IAuthRepository _repo;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
-        public AuthController(IAuthRepository repo, IConfiguration config)
+        public AuthController(IAuthRepository repo, IConfiguration config, IMapper mapper)
         {
             _repo = repo;
             _config = config;
+            _mapper = mapper;
         }
 
         [HttpPost("register")]
@@ -47,9 +51,9 @@ namespace WebAppsLab6.Controllers
                 return BadRequest(ModelState);
             }
 
-            var newUser = await _repo.Register(user.UserName, user.Password);
+            var newUser = await _repo.Register(_mapper.Map<User>(user), user.Password);
             // Temporary return result for testing
-            return StatusCode(201, new { ID = newUser.ID, UserName = newUser.UserName });
+            return Created("api/auth/register", _mapper.Map<UserDetailsDTO>(newUser));
         }
 
         [HttpPost("login")]

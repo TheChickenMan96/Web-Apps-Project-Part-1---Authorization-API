@@ -20,7 +20,15 @@ namespace WebAppsLab6.Data
         {
             var user = await _context.Users.FirstOrDefaultAsync(u => u.UserName == userName);
 
-            return (user == null || !PasswordHashVerified(password, user.PasswordHash, user.PasswordSalt)) ? null : user;
+            if(user == null || !PasswordHashVerified(password, user.PasswordHash, user.PasswordSalt))
+            {
+                return null;
+            } else
+            {
+                user.LastActive = DateTime.Now;
+                await _context.SaveChangesAsync();
+                return user;
+            }
         }
 
         private bool PasswordHashVerified(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -40,19 +48,21 @@ namespace WebAppsLab6.Data
             return computedHash.SequenceEqual(passwordHash);
         }
 
-        public async Task<User> Register(string userName, string password)
+        public async Task<User> Register(User user, string password)
         {
             // Hash the password using SHA512 with random key (salt)
             var hash = new HMACSHA512();
             var computedHash = hash.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
 
-            var newUser = new User { UserName = userName };
-            newUser.PasswordHash = computedHash;
-            newUser.PasswordSalt = hash.Key;
+            
+            user.PasswordHash = computedHash;
+            user.PasswordSalt = hash.Key;
 
-            await _context.Users.AddAsync(newUser);
+            user.Created = DateTime.Now;
+
+            await _context.Users.AddAsync(user);
             await _context.SaveChangesAsync();
-            return newUser;
+            return user;
         }
 
         public bool ValidateUserName(string userName)

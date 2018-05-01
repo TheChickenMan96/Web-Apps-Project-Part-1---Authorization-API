@@ -30,7 +30,10 @@ namespace WebAppsLab6.Data
         public async Task<User> GetUser(int id)
         {
             var user = await _context.Users.SingleOrDefaultAsync(u => u.ID == id);
-            user.Photos.Append(await _context.Photos.SingleOrDefaultAsync(p => p.UserId == user.ID));
+            var userPhotos = _context.Photos.Where(p => p.UserId == user.ID);
+            foreach(Photo p in userPhotos) {
+                user.Photos.Append(p);
+            }
             return user;
         }
 
@@ -39,7 +42,11 @@ namespace WebAppsLab6.Data
             var users = await _context.Users.ToListAsync();
             foreach(User u in users)
             {
-                u.Photos.Append(await _context.Photos.SingleOrDefaultAsync(p => p.UserId == u.ID));
+                var userPhotos = _context.Photos.Where(p => p.UserId == u.ID);
+                foreach (Photo p in userPhotos)
+                {
+                    u.Photos.Append(p);
+                }
             }
             return users;
         }

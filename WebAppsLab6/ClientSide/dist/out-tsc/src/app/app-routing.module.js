@@ -13,6 +13,8 @@ var home_component_1 = require("./home/home.component");
 var member_list_component_1 = require("./member/member-list/member-list.component");
 var friend_list_component_1 = require("./friend-list/friend-list.component");
 var messages_component_1 = require("./messages/messages.component");
+var member_details_component_1 = require("./member/member-details/member-details.component");
+var member_edit_component_1 = require("./member/member-edit/member-edit.component");
 var routes = [
     { path: 'register', component: register_component_1.RegisterComponent },
     { path: 'home', component: home_component_1.HomeComponent },
@@ -20,6 +22,8 @@ var routes = [
     { path: 'members', component: member_list_component_1.MemberListComponent },
     { path: 'friends', component: friend_list_component_1.FriendListComponent },
     { path: 'messages', component: messages_component_1.MessagesComponent },
+    { path: 'members/:id', component: member_details_component_1.MemberDetailsComponent },
+    { path: 'member/edit', component: member_edit_component_1.MemberEditComponent }
 ];
 var AppRoutingModule = /** @class */ (function () {
     function AppRoutingModule() {

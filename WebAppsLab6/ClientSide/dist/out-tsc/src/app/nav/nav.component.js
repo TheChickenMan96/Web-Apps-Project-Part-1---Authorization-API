@@ -11,15 +11,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var auth_service_1 = require("../services/auth.service");
+var router_1 = require("@angular/router");
 var NavComponent = /** @class */ (function () {
-    function NavComponent(authService) {
+    function NavComponent(authService, router) {
         this.authService = authService;
+        this.router = router;
         this.model = {};
         this.isCollapsed = false;
         this.loggedIn = false;
-        this.user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName : '';
         this.alertPlaying = false;
         this.alert = {};
+        this.user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName : '';
     }
     NavComponent.prototype.ngOnInit = function () {
     };
@@ -42,6 +44,7 @@ var NavComponent = /** @class */ (function () {
                 msg: 'Successfully Logged In',
                 timeout: 2000
             };
+            this.router.navigate(['/members']);
         }
         else if (errorStatus == -1) {
             this.alert = {
@@ -71,8 +74,10 @@ var NavComponent = /** @class */ (function () {
     NavComponent.prototype.logOut = function () {
         this.authService.logOut();
         this.playAlert(-1);
+        this.user = '';
     };
     NavComponent.prototype.checkLogin = function () {
+        this.user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName : '';
         return this.authService.isExpired();
     };
     NavComponent = __decorate([
@@ -81,7 +86,7 @@ var NavComponent = /** @class */ (function () {
             templateUrl: './nav.component.html',
             styleUrls: ['./nav.component.css']
         }),
-        __metadata("design:paramtypes", [auth_service_1.AuthService])
+        __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
     ], NavComponent);
     return NavComponent;
 }());

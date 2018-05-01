@@ -25,6 +25,15 @@ var member_list_component_1 = require("./member/member-list/member-list.componen
 var member_card_component_1 = require("./member/member-card/member-card.component");
 var friend_list_component_1 = require("./friend-list/friend-list.component");
 var messages_component_1 = require("./messages/messages.component");
+var datepicker_1 = require("ngx-bootstrap/datepicker");
+var member_details_component_1 = require("./member/member-details/member-details.component");
+var time_ago_pipe_1 = require("time-ago-pipe");
+var tabs_1 = require("ngx-bootstrap/tabs");
+var carousel_1 = require("ngx-bootstrap/carousel");
+var member_edit_component_1 = require("./member/member-edit/member-edit.component");
+var ngx_moment_1 = require("ngx-moment");
+var photo_editor_component_1 = require("./photo-editor/photo-editor.component");
+var ng2_file_upload_1 = require("ng2-file-upload");
 function tokenGetter() {
     return localStorage.getItem('token');
 }
@@ -42,7 +51,11 @@ var AppModule = /** @class */ (function () {
                 member_list_component_1.MemberListComponent,
                 member_card_component_1.MemberCardComponent,
                 friend_list_component_1.FriendListComponent,
-                messages_component_1.MessagesComponent
+                messages_component_1.MessagesComponent,
+                member_details_component_1.MemberDetailsComponent,
+                time_ago_pipe_1.TimeAgoPipe,
+                member_edit_component_1.MemberEditComponent,
+                photo_editor_component_1.PhotoEditorComponent
             ],
             imports: [
                 platform_browser_1.BrowserModule,
@@ -57,7 +70,12 @@ var AppModule = /** @class */ (function () {
                     }
                 }),
                 dropdown_1.BsDropdownModule.forRoot(),
-                alert_1.AlertModule.forRoot()
+                alert_1.AlertModule.forRoot(),
+                datepicker_1.BsDatepickerModule.forRoot(),
+                tabs_1.TabsModule.forRoot(),
+                carousel_1.CarouselModule.forRoot(),
+                ngx_moment_1.MomentModule,
+                ng2_file_upload_1.FileUploadModule
             ],
             providers: [auth_service_1.AuthService, user_service_1.UserService],
             bootstrap: [app_component_1.AppComponent]

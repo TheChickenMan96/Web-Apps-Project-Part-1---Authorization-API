@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { User } from '../models/user';
 import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-nav',
@@ -10,13 +11,14 @@ import { AlertComponent } from 'ngx-bootstrap/alert/alert.component';
 })
 export class NavComponent implements OnInit {
 
+  timer: any;
   model = {};
   isCollapsed = false;
   loggedIn = false;
-  user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName: '';
   alertPlaying = false;
   alert = {};
-  constructor(private authService: AuthService) { }
+  user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName : '';
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -40,6 +42,7 @@ export class NavComponent implements OnInit {
         msg: 'Successfully Logged In',
         timeout: 2000
       };
+      this.router.navigate(['/members']);
     } else if (errorStatus == -1) {
       this.alert = {
         type: 'info',
@@ -67,9 +70,12 @@ export class NavComponent implements OnInit {
   logOut() {
     this.authService.logOut();
     this.playAlert(-1);
+    this.user = '';
   }
 
   checkLogin() {
+    this.user = localStorage.getItem('user') != null ? JSON.parse(localStorage.getItem('user')).userName : '';
     return this.authService.isExpired();
   }
+  
 }

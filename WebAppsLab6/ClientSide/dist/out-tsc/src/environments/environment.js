@@ -6,6 +6,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.environment = {
     production: false,
-    apiUrl: '/api'
+    apiUrl: 'http://localhost:51190/api'
 };
 //# sourceMappingURL=environment.js.map

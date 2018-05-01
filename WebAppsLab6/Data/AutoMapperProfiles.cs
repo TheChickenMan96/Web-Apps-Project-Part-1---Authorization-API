@@ -30,6 +30,14 @@ namespace WebAppsLab6.Data
             });
 
             CreateMap<Photo, PhotoDTO>();
+
+            CreateMap<RegisterUserDTO, User>();
+
+            CreateMap<UpdateUserDTO, User>();
+
+            CreateMap<Photo, PhotoReturnedDTO>();
+
+            CreateMap<AddPhotoDTO, Photo>();
         }
     }
 }

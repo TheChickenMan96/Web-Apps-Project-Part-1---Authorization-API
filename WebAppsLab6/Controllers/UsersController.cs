@@ -25,7 +25,8 @@ namespace WebAppsLab6.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("User")]
+        [HttpGet]
+        [Route("/api/users/{id}")]
         public async Task<UserDetailsDTO> GetUser(int id)
         {
             var user = await _repo.GetUser(id);
@@ -34,12 +35,24 @@ namespace WebAppsLab6.Controllers
             
         }
 
-        [HttpGet("Users")]
+        [HttpGet]
+        [Route("/api/users/users")]
         public async Task<IEnumerable<UserBriefDTO>> GetUsers()
         {
             var users = await _repo.GetUsers();
             var allUsersDetails = _mapper.Map<IEnumerable<UserBriefDTO>>(users);
             return allUsersDetails;
+        }
+
+        [HttpPut]
+        [Route("/api/users/updateuser/{id}")]
+        public async Task<IActionResult> UpdateUser(int id, [FromBody] UpdateUserDTO updatedUser)
+        {
+            var user = await _repo.GetUser(id);
+            user = _mapper.Map(updatedUser, user);
+            await _repo.SaveAll();
+            return NoContent();
+
         }
     }
 }

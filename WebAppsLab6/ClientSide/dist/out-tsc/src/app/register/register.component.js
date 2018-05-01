@@ -11,10 +11,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 var core_1 = require("@angular/core");
 var auth_service_1 = require("../services/auth.service");
+var router_1 = require("@angular/router");
 var RegisterComponent = /** @class */ (function () {
-    function RegisterComponent(authService) {
+    function RegisterComponent(authService, router) {
         this.authService = authService;
-        this.model = { username: '', password: '' };
+        this.router = router;
+        this.model = { username: '', password: '', gender: 'male', name: '', birthDate: '', city: '' };
         this.passwordCon = { password: '' };
         this.errors = [];
         this.success = false;
@@ -25,10 +27,8 @@ var RegisterComponent = /** @class */ (function () {
         };
         this.alert = {
             type: 'danger',
-            timeout: 2000
+            timeout: 10000
         };
-        this.err = null;
-        this.data = null;
     }
     RegisterComponent.prototype.ngOnInit = function () {
     };
@@ -42,11 +42,34 @@ var RegisterComponent = /** @class */ (function () {
         if (error.UserName != null) {
             this.errors.push(error.UserName["0"]);
         }
+        if (error.Gender != null) {
+            this.errors.push(error.Gender["0"]);
+        }
+        if (error.Name != null) {
+            this.errors.push(error.Name["0"]);
+        }
+        if (error.birthDate != null) {
+            this.errors.push('Birth Date is required');
+        }
+        if (error.City != null) {
+            this.errors.push(error.City["0"]);
+        }
+        console.log(this.errors);
     };
     RegisterComponent.prototype.register = function () {
         var _this = this;
         if (this.checkPassword()) {
-            this.authService.register(this.model).subscribe(function (data) { return _this.success = true; }, function (error) { return _this.getErrors(error.error); });
+            this.authService.register(this.model).subscribe(function (data) { return _this.success = true; }, function (error) { return _this.getErrors(error.error); }, function () { return _this.loginAfterRegister(); });
+        }
+    };
+    RegisterComponent.prototype.loginAfterRegister = function () {
+        var _this = this;
+        if (this.success) {
+            var loginModel = { username: this.model.username, password: this.model.password };
+            this.authService.login(loginModel).subscribe();
+            setTimeout(function () {
+                _this.router.navigate(['/members']);
+            }, 2000);
         }
     };
     RegisterComponent = __decorate([
@@ -55,7 +78,7 @@ var RegisterComponent = /** @class */ (function () {
             templateUrl: './register.component.html',
             styleUrls: ['./register.component.css']
         }),
-        __metadata("design:paramtypes", [auth_service_1.AuthService])
+        __metadata("design:paramtypes", [auth_service_1.AuthService, router_1.Router])
     ], RegisterComponent);
     return RegisterComponent;
 }());

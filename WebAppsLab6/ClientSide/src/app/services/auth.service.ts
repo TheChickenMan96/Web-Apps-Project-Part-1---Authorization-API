@@ -8,7 +8,6 @@ import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
-  //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
   baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient, private jwtHelper: JwtHelperService) { }

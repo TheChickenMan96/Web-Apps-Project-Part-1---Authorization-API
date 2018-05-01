@@ -20,6 +20,12 @@ var UserService = /** @class */ (function () {
     UserService.prototype.getUsers = function () {
         return this.http.get(this.baseUrl + '/users/users');
     };
+    UserService.prototype.getUser = function (id) {
+        return this.http.get(this.baseUrl + '/users/' + id);
+    };
+    UserService.prototype.updateUser = function (id, updatedUser) {
+        return this.http.put(this.baseUrl + '/users/updateuser/' + id, updatedUser);
+    };
     UserService = __decorate([
         core_1.Injectable(),
         __metadata("design:paramtypes", [http_1.HttpClient])

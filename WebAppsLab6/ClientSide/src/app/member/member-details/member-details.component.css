@@ -1,0 +1,9 @@
+.profile-picture {
+  width: 15rem;
+  margin: 15px;
+  border-radius: 10px;
+}
+.thumbnail {
+  width: 100px;
+  height: 100px;
+}

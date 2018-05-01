@@ -18,7 +18,6 @@ var AuthService = /** @class */ (function () {
     function AuthService(http, jwtHelper) {
         this.http = http;
         this.jwtHelper = jwtHelper;
-        //baseUrl = 'https://webappslab6kevinmitchell.azurewebsites.net/api/auth/';
         this.baseUrl = environment_1.environment.apiUrl;
     }
     //The map method was not properly assigning 
